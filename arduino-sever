@@ -1,0 +1,22 @@
+// 引用 Servo Library
+#include <Servo.h> 
+
+//建立一個伺服馬達控制物件 
+Servo myservo; 
+
+int potpin = 0;   	//該變數用於存儲用電位器讀出的模擬值
+int val;         // 該變數用於儲存伺服馬達角度位置 
+
+void setup() 
+{ 
+   myservo.attach(9);   // 由Pin 9控制伺服馬達
+} 
+
+void loop() 
+{ 
+   val = analogRead(potpin);        //讀取電位器控制的模擬值 (範圍在0-1023) 
+   val = map(val, 0, 1023, 0, 179);   // 把0-1023的數值按比例縮放為0-180的數值
+
+myservo.write(val);  // 指定伺服馬達轉向的角度 
+delay(15); 			 // 等待15ms讓伺服馬達到達指定位置 
+}
